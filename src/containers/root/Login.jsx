@@ -5,7 +5,6 @@ import { login } from '../../actions/app'
 
 import { Paper, TextField, RaisedButton } from 'material-ui';
 
-
 class Login extends React.Component {
 	constructor() {
 		super();
@@ -14,10 +13,12 @@ class Login extends React.Component {
 			password: ''
 		}
 	}
+
 	handleChange = (e, newValue) => {
 		let id = e.target.id;
 		this.setState(Object.assign({}, this.state, { [id]: newValue }))
 	}
+
 	handleKeyPress = (e) => {
 		let id = e.target.id;
 		if (e.key === 'Enter') {
@@ -27,6 +28,7 @@ class Login extends React.Component {
 				this.submit();
 		}
 	}
+
 	submit = () => {
 		let credential = Object.assign({}, this.state);
 		this.props.login(credential);

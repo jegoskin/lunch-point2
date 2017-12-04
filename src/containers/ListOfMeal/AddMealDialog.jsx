@@ -1,7 +1,6 @@
 import React from 'react';
 import { Dialog, RaisedButton, TextField } from 'material-ui';
 
-
 class AddMeal extends React.Component {
 	constructor(){
 		super();
@@ -13,7 +12,7 @@ class AddMeal extends React.Component {
 		result: {
 			name: '',
 			description: '',
-			price: '',
+			price: ''
 		}
 	})
 
@@ -82,8 +81,9 @@ class AddMeal extends React.Component {
 				label="Add"
 				onClick={this.sendResult}
 				disabled={this.checkInputs()}
-			/>,
+			/>
 		]
+
 		return(
 			<div>
 				<Dialog
@@ -122,6 +122,6 @@ class AddMeal extends React.Component {
 			</div>
 		)
 	}
-
 }
+
 export default AddMeal

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dialog, RaisedButton, TextField, Checkbox } from 'material-ui';
 
-class EditUser extends React.Component {
+class AddUser extends React.Component {
 	constructor(){
 		super();
 		this.state = this.getInitState();
@@ -18,21 +18,8 @@ class EditUser extends React.Component {
 		isAdmin: false
 	})
 
-	show = (result) => {
-		let isAdmin = (result.roles.find(item => item === "Admin"))? true : false;
-		let isUser = (result.roles.find(item => item === "User"))? true : false;
-
-		this.setState({
-			open: true,
-			result: {
-				_id: result._id,
-				username: result.username,
-				roles: [],
-				password: result.password,
-			},
-			isUser,
-			isAdmin
-		});
+	show = () => {
+		this.setState({open:true})
 	}
 
 	sendResult = () => {
@@ -102,12 +89,13 @@ class EditUser extends React.Component {
 				label="Add"
 				onClick={this.sendResult}
 				disabled={this.checkInputs()}
-			/>,
+			/>
 		]
+
 		return(
 			<div>
 				<Dialog
-					title="Edit User"
+					title="Add new User"
 					actions={actions}
 					modal={true}
 					open={this.state.open}
@@ -149,6 +137,6 @@ class EditUser extends React.Component {
 			</div>
 		)
 	}
-
 }
-export default EditUser
+
+export default AddUser

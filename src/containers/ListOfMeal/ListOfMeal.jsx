@@ -22,15 +22,19 @@ class WeekEdit extends React.Component {
 			search: ''
 		}
 	}
+
 	componentDidMount() {
 		this.updatePaging(this.props.meal.paging.page, this.props.meal.paging.size);
 	}
-	updatePaging = (page, size) => {
-		this.props.getList(page, size);
+
+	updatePaging = (page, size, search) => {
+		this.props.getList(page, size, search);
 	}
+
 	handleAddMealDialog = (newMeal) => {
 		this.props.insert(newMeal);
 	}
+
 	handleEditMealDialog = (newMeal) => {
 		this.confirm.show('Edit Meal','Are you sure you want to edit a Meal?', (result) => {
 			if (result) {
@@ -38,6 +42,7 @@ class WeekEdit extends React.Component {
 			}
 		})
 	}
+
 	handleRemove = (id) => {
 		this.confirm.show('Delete Meal','Are you sure you want to delete a Meal?', (result) => {
 			if (result) {
@@ -45,24 +50,26 @@ class WeekEdit extends React.Component {
 			}
 		})
 	}
+
 	handleSearchChange = (e) => {
 		let value = e.currentTarget.value;
 		let newState = Object.assign({}, this.state);
 		newState.search = value;
 		this.setState(newState);
 	}
+
 	render(){
 	let	tableBody = this.props.meal.rows.map((item, index) => <TableRow key={ index }>
-			<TableRowColumn style={{paddingRight:'5px'}}>
+			<TableRowColumn style={{paddingRight: '5px'}}>
 				{ item.name }
 			</TableRowColumn>
-			<TableRowColumn style={{paddingLeft:'5px', paddingRight:'5px'}}>
+			<TableRowColumn style={{paddingLeft: '5px', paddingRight: '5px'}}>
 				{ item.description }
 			</TableRowColumn>
-			<TableRowColumn style={{paddingLeft:'5px', paddingRight:'5px'}}>
-			{ item.price + ' CZK' }
+			<TableRowColumn style={{paddingLeft:'5px', paddingRight: '5px'}}>
+				{ item.price + ' CZK' }
 			</TableRowColumn>
-			<TableRowColumn style={{paddingLeft:'5px', paddingRight:'5px', textAlign: 'right', width: '100px',}}>
+			<TableRowColumn style={{paddingLeft: '5px', paddingRight: '5px', textAlign: 'right', width: '100px',}}>
 				<IconButton onClick={() => this.EditMealDialog.show(item)}>
 					<EditIcon/>
 				</IconButton>
@@ -99,18 +106,18 @@ class WeekEdit extends React.Component {
 							</Toolbar>
 						</div>
 						<div>
-						<Table style={{ marginTop: '10px',}}>
+						<Table style={{marginTop: '10px',}}>
 							<TableHeader
-								style={{ backgroundColor: grey100, }}
+								style={{backgroundColor: grey100,}}
 								displaySelectAll={false}
 								adjustForCheckbox={false}
 								enableSelectAll={false}
 							>
 							<TableRow >
-								<TableHeaderColumn style={{paddingRight:'5px'}}>Name</TableHeaderColumn>
-								<TableHeaderColumn style={{paddingLeft:'5px', paddingRight:'5px'}}>Description</TableHeaderColumn>
-								<TableHeaderColumn style={{paddingLeft:'5px', paddingRight:'5px'}}>Price</TableHeaderColumn>
-								<TableHeaderColumn  style={{paddingLeft:'5px', paddingRight:'5px', width: '100px'}}>
+								<TableHeaderColumn style={{paddingRight: '5px'}}>Name</TableHeaderColumn>
+								<TableHeaderColumn style={{paddingLeft: '5px', paddingRight: '5px'}}>Description</TableHeaderColumn>
+								<TableHeaderColumn style={{paddingLeft: '5px', paddingRight: '5px'}}>Price</TableHeaderColumn>
+								<TableHeaderColumn  style={{paddingLeft: '5px', paddingRight: '5px', width: '100px'}}>
 									<IconButton style={{float: 'right',}} onClick={() => this.AddMealDialog.show()} >
 										<AddIcon />
 									</IconButton>
@@ -135,14 +142,14 @@ class WeekEdit extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	meal: state.meal.data,
+	meal: state.meal.data
 })
 
 const mapDispatchToProps = {
 	getList,
 	insert,
 	remove,
-	update,
+	update
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WeekEdit);

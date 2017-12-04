@@ -43,7 +43,6 @@ class WeekList extends React.Component {
 		let newState = Object.assign({}, this.state);
 		let d = moment().year(newState.result.year);
 		newState.result.week++;
-		
 		if ( newState.result.week > d.weeksInYear() ) {
 			newState.result.year++;
 			newState.result.week = 1;
@@ -51,11 +50,11 @@ class WeekList extends React.Component {
 		this.setState(newState);
 		this.weekDays();
 	}
+
 	handlePrevWeek = () => {
 		let newState = Object.assign({}, this.state);
 		let d = moment().year(newState.result.year);
 		newState.result.week--;
-
 		if ( newState.result.week === 0 ) {
 			newState.result.year--;
 			newState.result.week = d.weeksInYear();
@@ -67,6 +66,7 @@ class WeekList extends React.Component {
 	handleMealOrder = (mealId, date) => {
 		this.props.order({user_id: this.props.login.data._id, date, meal_id: mealId}, () => this.weekDays());
 	}
+
 	handleMealUnorder = (mealId, date) => {
 		this.props.unorder({user_id: this.props.login.data._id,	date,	meal_id: mealId}, () => this.weekDays());
 	}
@@ -82,7 +82,7 @@ class WeekList extends React.Component {
 							{ order? <IconButton title="Remove Meal" onClick = {() => this.handleMealUnorder(meal._id, key)} style={{padding: '0', width: '30px',  height: '30px',}}><RemoveIcon/></IconButton> : null }
 						</TableRowColumn>
 						<TableRowColumn style={{width: '10px', paddingRight: '0px',}}>
-								{ order? order.amount : 0 }
+							{ order? order.amount : 0 }
 						</TableRowColumn>
 						<TableRowColumn>
 							{ meal.name }
@@ -113,20 +113,19 @@ class WeekList extends React.Component {
 					</TableRow>
 					</TableHeader>
 					<TableBody displayRowCheckbox={false} >
-						{body}
+						{ body }
 					</TableBody>
 				</Table>
-			)}
-		);
-
+			)
+		})
 		return(
 			<div>
 				<Card style={{marginTop: '10px', padding: '20px',}}>
 					<CardMedia>
 						<div style={{backgroundColor: blue100, height: '48px', padding: '0px', }}>
-							<IconButton tooltip="Previous Week" style={{float: 'left', width: '42px', height: '42px', }} onClick={ () => this.handlePrevWeek() } ><LeftIcon style={{ width: '42px', height: '42px', }} /></IconButton>
+							<IconButton title="Previous Week" style={{float: 'left', width: '42px', height: '42px', }} onClick={ () => this.handlePrevWeek() } ><LeftIcon style={{ width: '42px', height: '42px', }} /></IconButton>
 							<div style={{float: 'left', marginTop: '15px', }}><strong>Week { this.state.result.week }</strong>/ { this.state.result.year } </div>
-							<IconButton tooltip="Next Week" style={{float: 'right',}} onClick={ () => this.handleNextWeek() }><RightIcon /></IconButton>
+							<IconButton title="Next Week" style={{float: 'right',}} onClick={ () => this.handleNextWeek() }><RightIcon /></IconButton>
 						</div>
 						<div style={{clear: 'both', width: '100%',}}>
 							{ table }
@@ -141,7 +140,7 @@ class WeekList extends React.Component {
 const mapStateToProps = (state) => ({
 	days: state.day.data,
 	login: state.layout.login,
-	orders: state.order.data,
+	orders: state.order.data
 })
 
 const mapDispatchToProps = {

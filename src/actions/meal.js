@@ -1,4 +1,4 @@
-import api from '../reducers/api';
+import api from '../api/api';
 const types = require('../reducers/meal').types;
 
 export const list = ( page, size, search ) => (dispatch) => {

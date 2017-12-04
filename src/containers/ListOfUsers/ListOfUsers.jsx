@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Toolbar,ToolbarGroup, Card, CardMedia, IconButton, Table, TableHeader, TableHeaderColumn, TableRow, TableBody, TableRowColumn } from 'material-ui';
+import { TextField, Toolbar, ToolbarGroup, Card, CardMedia, IconButton, Table, TableHeader, TableHeaderColumn, TableRow, TableBody, TableRowColumn } from 'material-ui';
 import { connect } from 'react-redux';
 
 import AddUserDialog from './AddUserDialog';
@@ -23,15 +23,19 @@ class ListOfUsers extends React.Component {
 			search: ''
 		}
 	}
+
 	componentDidMount() {
 		this.updatePaging(this.props.users.paging.page, this.props.users.paging.size);
 	}
+
 	updatePaging = (page, size) => {
 		this.props.usersList(page, size);
 	}
+
 	handleAddUserDialog = (newUser) => {
 		this.props.insert(newUser);
 	}
+
 	handleEditUserDialog = (newUser) => {
 		this.confirm.show('Edit User','Are you sure you want to edit a User?', (result) => {
 			if (result) {
@@ -39,6 +43,7 @@ class ListOfUsers extends React.Component {
 			}
 		})
 	}
+
 	handleRemove = (id) => {
 		this.confirm.show('Delete User','Are you sure you want to delete a User?', (result) => {
 			if (result) {
@@ -46,12 +51,14 @@ class ListOfUsers extends React.Component {
 			}
 		})
 	}
+
 	handleSearchChange = (e) => {
 		let value = e.currentTarget.value;
 		let newState = Object.assign({}, this.state);
 		newState.search = value;
 		this.setState(newState);
 	}
+	
 	render() {
 		let	tableBody = this.props.users.rows.map((item, index) => <TableRow key={ index }>
 			<TableRowColumn>
@@ -130,8 +137,8 @@ class ListOfUsers extends React.Component {
 					<Paging pageSizes={[5, 10, 50, 100]} paging={this.props.users.paging} onNewPaging={(page, size) => this.updatePaging(page, size)} />
 					<div style={{clear: 'both'}}></div>
 				</Card>
-				{<AddUserDialog ref={i => this.AddUserDialog = i} onResult={this.handleAddUserDialog}/>}
-				{<EditUserDialog ref={i => this.EditUserDialog = i} onResult={this.handleEditUserDialog}/>}
+				<AddUserDialog ref={i => this.AddUserDialog = i} onResult={this.handleAddUserDialog}/>
+				<EditUserDialog ref={i => this.EditUserDialog = i} onResult={this.handleEditUserDialog}/>
 				<ConfirmDialog ref={i => this.confirm = i} />
 			</div>
 		)
@@ -139,14 +146,14 @@ class ListOfUsers extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	users: state.user.data,
+	users: state.user.data
 })
 
 const mapDispatchToProps = {
 	usersList,
 	insert,
 	remove,
-	update,
+	update
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListOfUsers);

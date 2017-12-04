@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { MuiThemeProvider } from 'material-ui/styles';
 import cutomTheme from './styles/materialTheme';
 
-import Root from './containers/root/Root';
+import Root from './containers/Root/Root';
 import reducer from './reducers'
 
 const middleware = applyMiddleware(thunk, createLogger());

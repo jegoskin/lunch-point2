@@ -5,11 +5,11 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { AppBar, Card, Drawer, MenuItem, IconButton } from 'material-ui';
 
 import Login from './Login';
-import WeekList from '../wiev/WeekList';
-import ListOfMeal from '../edit/ListOfMeal';
-import AddMealToWeek from '../edit/AddMealToWeek';
-import UserOrders from '../wiev/UserOrders';
-import ListOfUsers from '../edit/ListOfUsers';
+import WeekList from '../WeekList/WeekList';
+import ListOfMeal from '../ListOfMeal/ListOfMeal';
+import AddMealToWeek from '../AddMealToWeek/AddMealToWeek';
+import UserOrders from '../UserOrders/UserOrders';
+import ListOfUsers from '../ListOfUsers/ListOfUsers';
 import { login, logout } from '../../actions/app';
 
 import { grey50 } from 'material-ui/styles/colors';
@@ -31,7 +31,7 @@ export class NavBarMain extends React.Component {
 
   getInitState = () => ({
     drawerToggle: false,
-    logIn: false,
+    logIn: false
   })
 
   handleDrawerClick = (item) => {
@@ -68,13 +68,11 @@ export class NavBarMain extends React.Component {
           title="Lunch Point"
           iconElementLeft={ <IconButton onClick={() => this.handleDrawerClick()}><Menu color={grey50} style={{width: '30px', height: '30px', marginTop: '8px',}} /></IconButton> }
         />
-
         { isInRole(this.props.loginRoles.data.roles, "Admin") && <MenuItem onClick={() => this.handleDrawerClick('/meal')} primaryText="List Of Meal"/> }
         { isInRole(this.props.loginRoles.data.roles, "Admin") && <MenuItem onClick={() => this.handleDrawerClick('/users')} primaryText="List Of Users"/> }
         { isInRole(this.props.loginRoles.data.roles, "Admin") && <MenuItem onClick={() => this.handleDrawerClick('/meal-to-week')} primaryText="Add Meal To Week"/> }
         { isInRole(this.props.loginRoles.data.roles, "User") && <MenuItem onClick={() => this.handleDrawerClick('/')} primaryText="Week menu"/> }
         { isInRole(this.props.loginRoles.data.roles, "User") && <MenuItem onClick={() => this.handleDrawerClick('/user-orders/' + this.props.loginRoles.data._id)} primaryText="User Orders"/> }
-
       </Drawer>
       </div>
     )
@@ -89,6 +87,7 @@ const mapDispatchToProps = {
   logout,
   login
 }
+
 const NavBar = withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBarMain));
 
 class Root extends React.Component {
@@ -116,8 +115,10 @@ class Root extends React.Component {
 }
 
 const root_mapStateToProps = (state) => ({
-  login: state.layout.login,
+  login: state.layout.login
 })
 
-const root_mapDispatchToProps = {}
+const root_mapDispatchToProps = {
+}
+
 export default connect(root_mapStateToProps, root_mapDispatchToProps)(Root);

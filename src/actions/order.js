@@ -1,4 +1,4 @@
-import api from '../reducers/api';
+import api from '../api/api';
 const types = require('../reducers/order').types;
 
 export const orderList = ( days, user_id ) => (dispatch) => {

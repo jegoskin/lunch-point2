@@ -10,7 +10,7 @@ class ConfirmDialog extends React.Component {
 	getInitState = () => ({
 		open: false,
 		title: '',
-		message: '',
+		message: ''
 	});
 
 	sendResult = (result) => {
@@ -23,7 +23,7 @@ class ConfirmDialog extends React.Component {
 			open: true,
 			title: title,
 			message: message,
-			onResult: callback,
+			onResult: callback
 		});
 	};
 
@@ -43,6 +43,7 @@ class ConfirmDialog extends React.Component {
 				onClick={() => this.sendResult(true)}
 			/>
 		]
+
 		return(
 			<div>
 				<Dialog

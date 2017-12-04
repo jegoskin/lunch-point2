@@ -1,4 +1,4 @@
-import api from '../reducers/api';
+import api from '../api/api';
 import moment from 'moment';
 const types = require('../reducers/day').types;
 

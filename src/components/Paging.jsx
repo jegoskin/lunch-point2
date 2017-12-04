@@ -32,6 +32,8 @@ class Paging extends React.Component {
 						{ SelectFieldBody }
 					</SelectField>
 			</div>
-	)};
+		)
+	}
 }
+
 export default Paging;

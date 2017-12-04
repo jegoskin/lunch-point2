@@ -90,8 +90,9 @@ class EditMealDialog extends React.Component {
 				label="Update"
 				onClick={this.sendResult}
 				disabled={this.checkInputs()}
-			/>,
+			/>
 		]
+
 		return(
 			<div>
 				<Dialog
@@ -130,6 +131,6 @@ class EditMealDialog extends React.Component {
 			</div>
 		)
 	}
-
 }
+
 export default EditMealDialog

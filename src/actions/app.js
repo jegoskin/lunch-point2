@@ -1,4 +1,4 @@
-import api from '../reducers/api';
+import api from '../api/api';
 const types = require('../reducers/app').types;
 
 export const login = ({ username, password }) => (dispatch) => {

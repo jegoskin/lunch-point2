@@ -35,16 +35,16 @@ class AddMealToWeek extends React.Component {
 		this.updatePaging(this.props.meal.paging.page, this.props.meal.paging.size);
 		this.weekDays();
 	}
-	updatePaging = (page, size) => {
-		this.props.getMealList(page, size);
+
+	updatePaging = (page, size, search) => {
+		this.props.getMealList(page, size, search);
 	}
+
 	weekDays = () => {
 		let days = [];
-
 		for (let i = 0; i < 5; i++){
 			days.push(moment().year(this.state.result.year).week(this.state.result.week).day(i+1).format('YYYY-MM-DD'));
 		}
-
 		this.props.dayList(days);
 	}
 
@@ -60,6 +60,7 @@ class AddMealToWeek extends React.Component {
 		this.setState(newState);
 		this.weekDays();
 	}
+
 	handlePrevWeek = () => {
 		let newState = Object.assign({}, this.state);
 		let d = moment().year(newState.result.year);
@@ -110,7 +111,7 @@ class AddMealToWeek extends React.Component {
 				</TableHeaderColumn>
 				<TableHeaderColumn></TableHeaderColumn>
 				<TableHeaderColumn style={{textAlign: 'right', overflow: 'visible' }}>
-				{ this.props.days[key]._id && <IconButton title="Day Delete" onClick = {() => this.handleDeleteDay(this.props.days[key]._id)} style={{padding: '0', width: '30px', height: '30px',}}><DeleteIcon/></IconButton>}
+					{ this.props.days[key]._id && <IconButton title="Day Delete" onClick = {() => this.handleDeleteDay(this.props.days[key]._id)} style={{padding: '0', width: '30px', height: '30px',}}><DeleteIcon/></IconButton>}
 				</TableHeaderColumn>
 			</TableRow>
 			</TableHeader>
@@ -127,8 +128,8 @@ class AddMealToWeek extends React.Component {
 							<TableRowColumn style={{width: '70px', textAlign: 'right', paddingRight: '0px',}}>
 								{ item.price + ' CZK' }
 							</TableRowColumn>
-							<TableRowColumn style={{textAlign: 'right', width: '30px', }}>
-								<IconButton title="Meal Remove" onClick = {() => this.handleDeleteDayMeal(this.props.days[key], index)}  style={{padding: '0', width: '30px', height: '30px',}}>
+							<TableRowColumn style={{textAlign: 'right', width: '30px',}}>
+								<IconButton title="Meal Remove" onClick = {() => this.handleDeleteDayMeal(this.props.days[key], index)} style={{padding: '0', width: '30px', height: '30px',}}>
 									<RemoveIcon/>
 								</IconButton>
 							</TableRowColumn>
@@ -136,9 +137,9 @@ class AddMealToWeek extends React.Component {
 					)
 				}
 				<TableRow >
-					<TableRowColumn style={{textAlign: this.props.days[key]._id? 'left' : 'center'}}>
+					<TableRowColumn style={{textAlign: this.props.days[key]._id? 'left' : 'center' }}>
 						{ this.props.days[key]._id && <IconButton title="Add Meal" onClick = {() => this.addMealDayDialog.show(this.props.days[key])} style={{padding: '0', width: '30px', height: '30px',}}><AddIcon/></IconButton>}
-						{ !this.props.days[key]._id && <IconButton title="Add Day" onClick = {() => this.props.insert({ date: key }, () => this.weekDays() )} style={{padding: '0', width: '30px', height: '30px',}}><AddBox/></IconButton>}
+						{ !this.props.days[key]._id && <IconButton title="Add Day" onClick = {() => this.props.insert({ date: key }, () => this.weekDays())} style={{padding: '0', width: '30px', height: '30px',}}><AddBox/></IconButton>}
 					</TableRowColumn>
 				</TableRow>
 			</TableBody>
@@ -150,8 +151,8 @@ class AddMealToWeek extends React.Component {
 				<Card style={{marginTop: '10px', padding: '20px',}}>
 					<CardMedia>
 						<div style={{backgroundColor: blue100, height: '48px', padding: '0px', }}>
-							<IconButton title="Previous Week" style={{float: 'left', width: '42px', height: '42px', }} onClick={ () => this.handlePrevWeek() } ><LeftIcon style={{ width: '42px', height: '42px', }} /></IconButton>
-							<div style={{float: 'left', marginTop: '15px', }}><strong>Week { this.state.result.week }</strong>/ { this.state.result.year } </div>
+							<IconButton title="Previous Week" style={{float: 'left', width: '42px', height: '42px',}} onClick={ () => this.handlePrevWeek() } ><LeftIcon style={{width: '42px', height: '42px',}} /></IconButton>
+							<div style={{float: 'left', marginTop: '15px',}}><strong>Week { this.state.result.week }</strong>/ { this.state.result.year } </div>
 							<IconButton title="Next Week" style={{float: 'right',}} onClick={ () => this.handleNextWeek() }><RightIcon /></IconButton>
 						</div>
 						<div style={{clear: 'both', width: '100%',}}>
@@ -159,7 +160,7 @@ class AddMealToWeek extends React.Component {
 						</div>
 					</CardMedia>
 				</Card>
-				<AddMealDayDialog ref={i => this.addMealDayDialog = i} meal={this.props.meal} onResult={this.handleAddMealDayDialog} onPaging={(page,size) => this.updatePaging(page,size)} />
+				<AddMealDayDialog ref={i => this.addMealDayDialog = i} meal={this.props.meal} onResult={this.handleAddMealDayDialog} onPaging={(page,size,search) => this.updatePaging(page,size,search)} />
 				<ConfirmDialog ref={i => this.confirm = i} />
 			</div>
 		)
@@ -176,7 +177,7 @@ const mapDispatchToProps = {
 	dayList,
 	insert,
 	update,
-	remove,
+	remove
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddMealToWeek);
