@@ -67,9 +67,6 @@ class ListOfUsers extends React.Component {
 			<TableRowColumn>
 				{ item.roles.map(key =>{ return key + ' ' }) }
 			</TableRowColumn>
-			<TableRowColumn >
-			{ item.password }
-			</TableRowColumn>
 			<TableRowColumn style={{textAlign: 'right', width: '150px',}}>
 			<IconButton onClick={() => this.EditUserDialog.show(item)}>
 					<EditIcon/>
@@ -85,7 +82,7 @@ class ListOfUsers extends React.Component {
 
 		return(
 			<div>
-				<Card style={{marginTop: '10px', padding: '20px',}}>
+				<Card style={{margin: '10px', padding: '20px'}}>
 					<CardMedia>
 						<div>
 							<Toolbar>
@@ -99,11 +96,11 @@ class ListOfUsers extends React.Component {
 										id="search"
 										onKeyPress={event => {
 											if (event.key === "Enter") {
-												(this.props.usersList(this.props.users.paging.page, this.props.users.paging.size,this.state.search))
+												(this.props.usersList(this.props.users.paging.page, this.props.users.paging.size, this.state.search))
 											}
 										}}
 									/>
-									<IconButton onClick={() => this.props.usersList(this.props.users.paging.page, this.props.users.paging.size,this.state.search)} >
+									<IconButton onClick={() => this.props.usersList(this.props.users.paging.page, this.props.users.paging.size, this.state.search)} >
 										<SearchIcon />
 									</IconButton>
 								</ToolbarGroup>
@@ -120,7 +117,6 @@ class ListOfUsers extends React.Component {
 							<TableRow >
 								<TableHeaderColumn>Name</TableHeaderColumn>
 								<TableHeaderColumn>Role</TableHeaderColumn>
-								<TableHeaderColumn>Password</TableHeaderColumn>
 								<TableHeaderColumn style={{textAlign: 'right', width: '150px',}}>
 									<IconButton style={{float: 'right',}} onClick={() => this.AddUserDialog.show()} >
 										<AddIcon />
@@ -134,7 +130,7 @@ class ListOfUsers extends React.Component {
 						</Table>
 						</div>
 					</CardMedia>
-					<Paging pageSizes={[5, 10, 50, 100]} paging={this.props.users.paging} onNewPaging={(page, size) => this.updatePaging(page, size)} />
+					<Paging pageSizes={[5, 10, 50, 100]} paging={this.props.users.paging} onNewPaging={(page, size) => this.updatePaging(page, size, this.state.search)} />
 					<div style={{clear: 'both'}}></div>
 				</Card>
 				<AddUserDialog ref={i => this.AddUserDialog = i} onResult={this.handleAddUserDialog}/>

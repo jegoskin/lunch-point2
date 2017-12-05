@@ -77,11 +77,11 @@ class WeekList extends React.Component {
 				let order = this.props.orders.filter(order => moment(order.date).format('YYYY-MM-DD') === key).find(order => order.meal._id === meal._id);
 				return (
 					<TableRow key={index}>
-						<TableRowColumn style={{textAlign: 'right', overflow: 'visible', width: '75px', padding: '0'}}>
+						<TableRowColumn style={{textAlign: 'left', overflow: 'visible', width: '75px', paddingRight: '0', paddingLeft: '15px',}}>
 							<IconButton title="Add Meal" onClick = {() => this.handleMealOrder(meal._id, key)} style={{padding: '0', width: '30px',  height: '30px',}}><AddIcon/></IconButton>
 							{ order? <IconButton title="Remove Meal" onClick = {() => this.handleMealUnorder(meal._id, key)} style={{padding: '0', width: '30px',  height: '30px',}}><RemoveIcon/></IconButton> : null }
 						</TableRowColumn>
-						<TableRowColumn style={{width: '10px', paddingRight: '0px',}}>
+						<TableRowColumn style={{width: '10px', padding: '0px',}}>
 							{ order? order.amount : 0 }
 						</TableRowColumn>
 						<TableRowColumn>
@@ -120,7 +120,7 @@ class WeekList extends React.Component {
 		})
 		return(
 			<div>
-				<Card style={{marginTop: '10px', padding: '20px',}}>
+				<Card style={{margin: '10px', padding: '20px'}}>
 					<CardMedia>
 						<div style={{backgroundColor: blue100, height: '48px', padding: '0px', }}>
 							<IconButton title="Previous Week" style={{float: 'left', width: '42px', height: '42px', }} onClick={ () => this.handlePrevWeek() } ><LeftIcon style={{ width: '42px', height: '42px', }} /></IconButton>

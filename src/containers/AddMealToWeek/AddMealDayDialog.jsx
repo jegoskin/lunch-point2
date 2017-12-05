@@ -92,11 +92,11 @@ class AddMealDayDialog extends React.Component {
 									id="search"
 									onKeyPress={event => {
 										if (event.key === "Enter") {
-											(this.updatePaging(this.props.meal.paging.page, this.props.meal.paging.size,this.state.search))
+											(this.updatePaging(this.props.meal.paging.page, this.props.meal.paging.size, this.state.search))
 										}
 									}}
 								/>
-								<IconButton onClick={() => this.updatePaging(this.props.meal.paging.page, this.props.meal.paging.size,this.state.search)} >
+								<IconButton onClick={() => this.updatePaging(this.props.meal.paging.page, this.props.meal.paging.size, this.state.search)} >
 									<SearchIcon />
 								</IconButton>
 							</ToolbarGroup>
@@ -123,7 +123,7 @@ class AddMealDayDialog extends React.Component {
 							{ tableBody }
 						</TableBody>
 					</Table>
-					<Paging pageSizes={[5, 10, 50, 100]} paging={this.props.meal.paging} onNewPaging={(page, size) => this.updatePaging(page, size)} />
+					<Paging pageSizes={[5, 10, 50, 100]} paging={this.props.meal.paging} onNewPaging={(page, size) => this.updatePaging(page, size, this.state.search)} />
 				</Dialog>
 			</div>
 		)

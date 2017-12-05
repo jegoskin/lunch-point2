@@ -81,7 +81,7 @@ class WeekEdit extends React.Component {
 
 		return(
 			<div>
-				<Card style={{marginTop: '10px', padding: '20px'}}>
+				<Card style={{margin: '10px', padding: '20px'}}>
 					<CardMedia>
 						<div>
 							<Toolbar>
@@ -95,11 +95,11 @@ class WeekEdit extends React.Component {
 										id="search"
 										onKeyPress={event => {
 											if (event.key === "Enter") {
-												(this.props.getList(this.props.meal.paging.page, this.props.meal.paging.size,this.state.search))
+												(this.props.getList(this.props.meal.paging.page, this.props.meal.paging.size, this.state.search))
 											}
 										}}
 									/>
-									<IconButton onClick={() => this.props.getList(this.props.meal.paging.page, this.props.meal.paging.size,this.state.search)} >
+									<IconButton onClick={() => this.props.getList(this.props.meal.paging.page, this.props.meal.paging.size, this.state.search)} >
 										<SearchIcon />
 									</IconButton>
 								</ToolbarGroup>
@@ -130,9 +130,9 @@ class WeekEdit extends React.Component {
 						</Table>
 						</div>
 					</CardMedia>
-					<Paging pageSizes={[5, 10, 50, 100]} paging={this.props.meal.paging} onNewPaging={(page, size) => this.updatePaging(page, size)} />
-					<div style={{clear: 'both'}}></div>
-			</Card>
+					<Paging pageSizes={[5, 10, 50, 100]} paging={this.props.meal.paging} onNewPaging={(page, size) => this.updatePaging(page, size, this.state.search)} />
+					<div style={{clear: 'both'}} />
+				</Card>
 				<AddMealDialog ref={i => this.AddMealDialog = i} onResult={this.handleAddMealDialog}/>
 				<EditMealDialog ref={i => this.EditMealDialog = i} onResult={this.handleEditMealDialog}/>
 				<ConfirmDialog ref={i => this.confirm = i} />

@@ -27,7 +27,7 @@ class AddMealToWeek extends React.Component {
 		open: false,
 		result: {
 			year: moment().year(),
-			week: moment().week(),
+			week: moment().week()
 		}
 	})
 
@@ -52,7 +52,6 @@ class AddMealToWeek extends React.Component {
 		let newState = Object.assign({}, this.state);
 		let d = moment().year(newState.result.year);
 		newState.result.week++;
-		
 		if ( newState.result.week > d.weeksInYear() ) {
 			newState.result.year++;
 			newState.result.week = 1;
@@ -65,7 +64,6 @@ class AddMealToWeek extends React.Component {
 		let newState = Object.assign({}, this.state);
 		let d = moment().year(newState.result.year);
 		newState.result.week--;
-
 		if ( newState.result.week === 0 ) {
 			newState.result.year--;
 			newState.result.week = d.weeksInYear();
@@ -116,7 +114,7 @@ class AddMealToWeek extends React.Component {
 			</TableRow>
 			</TableHeader>
 			<TableBody displayRowCheckbox={false} >
-				{	
+				{
 					this.props.days[key].meals && this.props.days[key].meals.map((item, index)  => 
 						<TableRow key={index}>
 							<TableRowColumn>
@@ -138,8 +136,8 @@ class AddMealToWeek extends React.Component {
 				}
 				<TableRow >
 					<TableRowColumn style={{textAlign: this.props.days[key]._id? 'left' : 'center' }}>
-						{ this.props.days[key]._id && <IconButton title="Add Meal" onClick = {() => this.addMealDayDialog.show(this.props.days[key])} style={{padding: '0', width: '30px', height: '30px',}}><AddIcon/></IconButton>}
 						{ !this.props.days[key]._id && <IconButton title="Add Day" onClick = {() => this.props.insert({ date: key }, () => this.weekDays())} style={{padding: '0', width: '30px', height: '30px',}}><AddBox/></IconButton>}
+						{ this.props.days[key]._id && <IconButton title="Add Meal" onClick = {() => this.addMealDayDialog.show(this.props.days[key])} style={{padding: '0', width: '30px', height: '30px',}}><AddIcon/></IconButton>}
 					</TableRowColumn>
 				</TableRow>
 			</TableBody>
@@ -148,7 +146,7 @@ class AddMealToWeek extends React.Component {
 
 		return(
 			<div>
-				<Card style={{marginTop: '10px', padding: '20px',}}>
+				<Card style={{margin: '10px', padding: '20px'}}>
 					<CardMedia>
 						<div style={{backgroundColor: blue100, height: '48px', padding: '0px', }}>
 							<IconButton title="Previous Week" style={{float: 'left', width: '42px', height: '42px',}} onClick={ () => this.handlePrevWeek() } ><LeftIcon style={{width: '42px', height: '42px',}} /></IconButton>
@@ -160,7 +158,7 @@ class AddMealToWeek extends React.Component {
 						</div>
 					</CardMedia>
 				</Card>
-				<AddMealDayDialog ref={i => this.addMealDayDialog = i} meal={this.props.meal} onResult={this.handleAddMealDayDialog} onPaging={(page,size,search) => this.updatePaging(page,size,search)} />
+				<AddMealDayDialog ref={i => this.addMealDayDialog = i} meal={this.props.meal} onResult={this.handleAddMealDayDialog} onPaging={(page, size, search) => this.updatePaging(page, size, search)} />
 				<ConfirmDialog ref={i => this.confirm = i} />
 			</div>
 		)

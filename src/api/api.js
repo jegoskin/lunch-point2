@@ -55,7 +55,6 @@ class Api {
 		})
 	}
 	order(user_id, date, meal_id) {
-	console.log({user_id, date, meal_id});
 		return new Promise((resolve, reject) => {
 			axios.post(url + 'order', { user_id, date, meal_id })
 			.then(response => resolve(response.data))

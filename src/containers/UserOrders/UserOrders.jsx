@@ -98,7 +98,7 @@ class UserOrders extends React.Component {
 
 		return(
 			<div>
-				<Card style={{marginTop: '10px', padding: '20px',}}>
+				<Card style={{margin: '10px', padding: '20px'}}>
 					<CardMedia>
 						<div style={{backgroundColor: blue100, height: '48px', padding: '0px', }}>
 							<IconButton title="Previous Month" style={{float: 'left', width: '42px', height: '42px', }} onClick={ () => this.handlePrevMonth() } ><LeftIcon style={{ width: '42px', height: '42px', }} /></IconButton>
